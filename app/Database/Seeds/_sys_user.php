@@ -24,7 +24,7 @@ class _sys_user extends Seeder
                 'user_phone'  => '087624132412',
                 'email' => 'dighoffr@gmail.com',
                 'user_address' => 'address example',
-                'username' => 'dighof',
+                'username' => 'dighoff',
                 'password' => \md5('password'),
                 'user_group_id' => '1',
             ],

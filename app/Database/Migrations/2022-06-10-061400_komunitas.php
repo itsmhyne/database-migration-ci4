@@ -50,21 +50,25 @@ class Komunitas extends Migration
 			],
 			'user_group_id'      => [
 				'type'           => 'VARCHAR',
-				'constraint'     => 50
+				'constraint'     => 50,
+				'default' => 2
 			],
 			'created_time DATETIME DEFAULT CURRENT_TIMESTAMP',
 			'created_by' => [
 				'type'           => 'INT',
 				'constraint'       => 4,
+				'default'           => 1,
 			],
-			'updated_time DATETIME DEFAULT CURRENT_TIMESTAMP',
+			'updated_time DATETIME',
 			'updated_by' => [
 				'type'           => 'INT',
 				'constraint'       => 4,
+				'null'           => true,
 			],
 			'status' => [
 				'type'           => 'INT',
 				'constraint'       => 1,
+				'default'        => 1,
 			]
 		]);
 
