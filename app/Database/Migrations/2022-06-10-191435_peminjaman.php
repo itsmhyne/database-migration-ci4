@@ -4,25 +4,29 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class Room extends Migration
+class Peminjaman extends Migration
 {
 	public function up()
 	{
+
 		$this->forge->addField([
-			'ruangan_id'          => [
+			'peminjaman_id'          => [
 				'type'           => 'INT',
 				'constraint'     => 5,
 				'unsigned'       => true,
 				'auto_increment' => true
 			],
-			'ruangan_nama'       => [
+			'peminjaman_nomor'       => [
 				'type'           => 'VARCHAR',
-				'constraint'     => '50'
+				'constraint'     => '20'
 			],
-			'ruangan_status' => [
-				'type' => 'INT',
-				'constraint' => '4',
-				'default' => 1
+			'ruangan_id'       => [
+				'type'           => 'INT',
+				'constraint'     => '4'
+			],
+			'user_id'       => [
+				'type'           => 'INT',
+				'constraint'     => '4'
 			],
 			'created_time DATETIME DEFAULT CURRENT_TIMESTAMP',
 			'created_by' => [
@@ -42,18 +46,14 @@ class Room extends Migration
 				'default'        => 1,
 			]
 		]);
-
-		// Membuat primary key
-		$this->forge->addKey('ruangan_id', TRUE);
-
-		// Membuat tabel news
-		$this->forge->createTable('ruangan', TRUE);
+		$this->forge->addKey('peminjaman_id', TRUE);
+		$this->forge->createTable('peminjaman', TRUE);
 	}
 
 	//--------------------------------------------------------------------
 
 	public function down()
 	{
-		$this->forge->dropTable('ruangan');
+		$this->forge->dropTable('peminjaman');
 	}
 }

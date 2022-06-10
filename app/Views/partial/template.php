@@ -120,6 +120,14 @@
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a href="<?= base_url('Peminjaman') ?>" class="nav-link">
+                                <i class="nav-icon fas fa-home"></i>
+                                <p>
+                                    Peminjaman
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-copy"></i>
                                 <p>
