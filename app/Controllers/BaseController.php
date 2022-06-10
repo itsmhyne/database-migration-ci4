@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Controllers;
 
 /**
@@ -15,6 +16,9 @@ namespace App\Controllers;
  */
 
 use CodeIgniter\Controller;
+use App\Libraries\System;
+use App\Libraries\Datatables;
+use \Config\Services;
 
 class BaseController extends Controller
 {
@@ -27,7 +31,9 @@ class BaseController extends Controller
 	 * @var array
 	 */
 	protected $helpers = [];
-
+	protected $libSys;
+	protected $datatables;
+	protected $input;
 	/**
 	 * Constructor.
 	 */
@@ -41,6 +47,27 @@ class BaseController extends Controller
 		//--------------------------------------------------------------------
 		// E.g.:
 		// $this->session = \Config\Services::session();
+		$this->lib_sys = new System();
+		$this->datatables = new Datatables();
+		$this->lib_sys->check_is_login();
+		$this->input = Services::request();
 	}
 
+	protected function resp_E($msg, $data = [])
+	{
+		header("Content-type: application/json; charset=utf-8");
+		$setResp = ['status' => 2, 'msg' => $msg];
+		$setResp = array_merge($setResp, $data);
+		echo json_encode($setResp, JSON_PRETTY_PRINT);
+		die();
+	}
+
+	protected function resp_S($msg, $data = [])
+	{
+		header("Content-type: application/json; charset=utf-8");
+		$setResp = ['status' => 1, 'msg' => $msg];
+		$setResp = array_merge($setResp, $data);
+		echo json_encode($setResp, JSON_PRETTY_PRINT);
+		die();
+	}
 }
