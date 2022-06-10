@@ -104,10 +104,16 @@
                     text: 'Password yang anda masukkan salah!',
                     type: 'error'
                 });
+            <?php } else if ($session->getFlashdata('code') == '4') { ?>
+                swal({
+                    title: 'Informasi!',
+                    text: 'Register berhasil, Silakan login!',
+                    type: 'success'
+                });
             <?php } else { ?>
                 swal({
                     title: 'Peringatan!',
-                    text: 'Email anda belum terdaftar!',
+                    text: 'Email/Username anda belum terdaftar!',
                     type: 'error'
                 });
         <?php }

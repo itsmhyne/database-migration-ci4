@@ -41,9 +41,9 @@ class Datamaster extends BaseController
         $m = $this->datatables->get();
         foreach ($m as $key => $value) {
             if ($m[$key]['ruangan_status'] == 1) {
-                $m[$key]['ruangan_status'] = 'Tersedia';
+                $m[$key]['ruangan_status'] = '<span class="badge bg-primary">Tersedia</span>';
             } else {
-                $m[$key]['ruangan_status'] = 'Dipinjam';
+                $m[$key]['ruangan_status'] = '<span class="badge bg-danger">Dipinjam</span>';
             }
         }
         $this->datatables->render_no_keys($m);

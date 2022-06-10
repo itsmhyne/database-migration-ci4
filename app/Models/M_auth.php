@@ -5,13 +5,13 @@ namespace App\Models;
 use Config\Database;
 use CodeIgniter\Model;
 
-class M_auth extends Model
+class M_auth extends BaseModel
 {
 
-    public function __construct()
-    {
-        $this->db = Database::connect();
-    }
+    // public function __construct()
+    // {
+    //     $this->db = Database::connect();
+    // }
 
     function check_login($data)
     {
@@ -63,5 +63,38 @@ class M_auth extends Model
         );
 
         $session->set($array);
+    }
+
+    function registerMember($data)
+    {
+        // cek apakah username sudah terdaftar
+        $checkUsername = $this->db->table('komunitas')
+            ->where('username', $data['username'])
+            ->get()
+            ->getRow();
+
+        if (!$checkUsername) {
+            // cek apakah password sama
+            if ($data['password'] == $data['password_confirmation']) {
+                // insert data ke table peminjaman
+                $tabelKomunitas = $this->db->table('komunitas');
+                $dataMember =  [
+                    'komunitas_logo' => 'default.jpg',
+                    'komunitas_nama' => $data['komunitas_nama'],
+                    'username' => $data['username'],
+                    'password' => \md5($data['password']),
+                    'created_time' => date('Y-m-d H:i:s'),
+                    'created_by' => 1,
+                    'status' => 1
+                ];
+                $tabelKomunitas->set($dataMember)
+                    ->insert();
+                return [1];
+            } else {
+                return [3];
+            }
+        } else {
+            return [2];
+        }
     }
 }

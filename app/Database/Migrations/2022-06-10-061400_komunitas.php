@@ -18,7 +18,8 @@ class Komunitas extends Migration
 			],
 			'komunitas_logo'       => [
 				'type'           => 'VARCHAR',
-				'constraint'     => 50
+				'constraint'     => 50,
+				'default' => 'default.jpg'
 			],
 			'komunitas_nama' => [
 				'type' => 'VARCHAR',
@@ -26,19 +27,23 @@ class Komunitas extends Migration
 			],
 			'bidang'      => [
 				'type'           => 'VARCHAR',
-				'constraint'     => 50
+				'constraint'     => 50,
+				'default' => ''
 			],
 			'jml_anggota' => [
 				'type'           => 'INT',
 				'constraint'           => 6,
+				'default' => 0
 			],
 			'ketua'      => [
 				'type'           => 'VARCHAR',
-				'constraint'     => 50
+				'constraint'     => 50,
+				'default' => ''
 			],
 			'kontak'      => [
 				'type'           => 'VARCHAR',
-				'constraint'     => 50
+				'constraint'     => 50,
+				'default' => 0
 			],
 			'username'      => [
 				'type'           => 'VARCHAR',
