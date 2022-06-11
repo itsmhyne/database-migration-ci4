@@ -16,6 +16,7 @@ class Peminjaman extends BaseController
     {
         $this->m = new M_peminjaman();
         $this->db = Database::connect();
+        $this->session = \Config\Services::session();
         ini_set("memory_limit", "100000M");
         ini_set("max_input_vars ", "3000");
     }
@@ -68,5 +69,46 @@ class Peminjaman extends BaseController
         $count++;
         $date = date('Ym');
         return sprintf("{$kode}{$date}%04d", $count);
+    }
+
+    public function ruang_dipinjam()
+    {
+        $data['menu'] = "Ruangan Dipinjam";
+        $this->lib_sys->view('ruang_dipinjam/index', $data);
+    }
+
+    public function ruangan_dipinjam_fetch()
+    {
+        $user_id = $this->session->get('user_id');
+        $this->datatables->search(['peminjaman_nomor', 'ruangan_nama', 'peminjaman_status', 'peminjaman_id']);
+        $this->datatables->select('peminjaman_nomor, ruangan_nama, peminjaman_status, peminjaman_id, p.ruangan_id');
+        $this->datatables->from('peminjaman as p');
+        $this->datatables->join('komunitas as k', 'k.komunitas_id = p.komunitas_id');
+        $this->datatables->join('ruangan as r', 'r.ruangan_id = p.ruangan_id');
+        $this->datatables->where('p.status', '1');
+        $m = $this->datatables->get();
+        foreach ($m as $key => $value) {
+            if ($m[$key]['peminjaman_status'] == 1) {
+                $m[$key]['peminjaman_status'] = '<span class="badge bg-warning">Sedang Dipinjam</span>';
+                $m[$key]['peminjaman_id'] = '<button class="btn btn-sm btn-warning btn-icon dt-kembalikan" ruangan-id="' . $m[$key]['ruangan_id'] . '" target-id="' . $m[$key]['peminjaman_id'] . '" onclick="dt_kembalikan(this)"><i class="fas fa-sign-in-alt mr-2"></i>Kembalikan</button>';
+            } else {
+                $m[$key]['peminjaman_status'] = '<span class="badge bg-success">Dikembalikan</span>';
+                $m[$key]['peminjaman_id'] = '<button class="btn btn-sm btn-success btn-icon disabled"><i class="fas fa-check-circle mr-2"></i>Dikembalikan</button>';
+            }
+            $m[$key]['peminjaman_nomor'] = $m[$key]['peminjaman_nomor'] . '<button class="btn btn-icon btn-sm btn-info ml-2"><i class="fas fa-print"></i></button>';
+        }
+        $this->datatables->render_no_keys($m);
+    }
+
+    public function ruangan_dipinjam_dikembalikan()
+    {
+        $peminjaman_id = $_POST['id'];
+        $ruangan_id = $_POST['ruangan'];
+        $response = $this->m->ruangan_dipinjam_dikembalikan($peminjaman_id, $ruangan_id);
+        if ($response) {
+            print_r(json_encode(array('status' => 1, 'msg' => 'Ruangan Berhasil Dikembalikan!')));
+        } else {
+            print_r(json_encode(array('status' => 0, 'msg' => 'Ruangan Gagal Dikembalikan')));
+        }
     }
 }

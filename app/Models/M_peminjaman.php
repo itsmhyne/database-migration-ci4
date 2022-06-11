@@ -24,7 +24,7 @@ class M_peminjaman extends BaseModel
 
         // update status ruangan
         $tabelRuangan = $this->db->table('ruangan');
-        $dataRuangan = $this->setCrudIdentity('insert', [
+        $dataRuangan = $this->setCrudIdentity('update', [
             'ruangan_status' => 2 //2 adalah status jika ruangan sedang dipinjam, 1 jika tersedia
         ]);
         $tabelRuangan->set($dataRuangan)
@@ -33,5 +33,31 @@ class M_peminjaman extends BaseModel
 
         // notifikasi 
         $this->resp_S('Ruangan berhasil dipinjam');
+    }
+
+    function ruangan_dipinjam_dikembalikan($peminjaman_id, $ruangan_id)
+    {
+        $user_id = $this->session->get('user_id');
+
+        // update data ke table peminjaman
+        $tabelPeminjaman = $this->db->table('peminjaman');
+        $dataPeminjam = $this->setCrudIdentity('insert', [
+            'peminjaman_status' => 2, //dikembalikan
+        ]);
+        $tabelPeminjaman->set($dataPeminjam)
+            ->where('peminjaman_id', $peminjaman_id)
+            ->update();
+
+        // update status ruangan
+        $tabelRuangan = $this->db->table('ruangan');
+        $dataRuangan = $this->setCrudIdentity('update', [
+            'ruangan_status' => 1 // status di ubah menjadi tersedia
+        ]);
+        $tabelRuangan->set($dataRuangan)
+            ->where('ruangan_id', $ruangan_id)
+            ->update();
+
+        // notifikasi 
+        $this->resp_S('Ruangan Berhasil Dikembalikan');
     }
 }

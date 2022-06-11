@@ -121,10 +121,18 @@
                         </li>
                         <?php if ($session_group_id == 2) : ?>
                             <li class="nav-item">
-                                <a href="<?= base_url('Peminjaman') ?>" class="nav-link">
+                                <a href="<?= base_url('Peminjaman/index') ?>" class="nav-link">
                                     <i class="nav-icon fas fa-home"></i>
                                     <p>
                                         Peminjaman
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="<?= base_url('Peminjaman/ruang_dipinjam') ?>" class="nav-link">
+                                    <i class="nav-icon fas fa-house-damage"></i>
+                                    <p>
+                                        Ruang Dipinjam
                                     </p>
                                 </a>
                             </li>

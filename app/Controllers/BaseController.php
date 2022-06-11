@@ -34,6 +34,7 @@ class BaseController extends Controller
 	protected $libSys;
 	protected $datatables;
 	protected $input;
+	// protected $session;
 	/**
 	 * Constructor.
 	 */
