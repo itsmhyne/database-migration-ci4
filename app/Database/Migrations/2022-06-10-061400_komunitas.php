@@ -19,7 +19,7 @@ class Komunitas extends Migration
 			'komunitas_logo'       => [
 				'type'           => 'VARCHAR',
 				'constraint'     => 50,
-				'default' => 'default.jpg'
+				'default' => 'default_user.jpg'
 			],
 			'komunitas_nama' => [
 				'type' => 'VARCHAR',
