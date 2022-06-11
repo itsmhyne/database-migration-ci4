@@ -17,11 +17,7 @@ Aplikasi ini dibuat dengan framwork Codeigniter 4 versi 4.0.0
 ```
 - Jalankan Seeder Database
 ```bash
-  php spark db:seed
-```
-- Masukkan nama seeder
-```bash
-  allSeed
+  php spark db:seed Dummy
 ```
 - Aplikasi siap digunakan
 ```bash
