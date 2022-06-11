@@ -23,7 +23,7 @@ class App extends BaseConfig
 	| environments.
 	|
 	*/
-	public $baseURL = 'http://localhost/lending/';
+	public $baseURL = 'http://localhost/learn/';
 
 	/*
 	|--------------------------------------------------------------------------

@@ -6,7 +6,7 @@
                 <h1><?= $menu ?></h1>
             </div>
             <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
+                <ol class="breadcrumb float-sm-right d-none">
                     <button class="btn btn-success btn-sm btn-icon" onclick="dt_add(this)"><i class="fa fa-plus"></i> Tambahkan Ruangan</button>
                 </ol>
             </div>
@@ -150,8 +150,8 @@
         var id = t.getAttribute('target-id');
         swal({
             title: 'Peringatan!',
-            text: 'Data yang dihapus tidak dapat dikembalikan!',
-            type: 'warning',
+            text: 'Apakah anda yakin untuk meminjam ruangan ini?',
+            type: 'info',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#A9A9A9',
