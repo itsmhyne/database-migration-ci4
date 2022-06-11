@@ -28,7 +28,7 @@ class Peminjaman extends BaseController
 
     public function room_fetch()
     {
-        $this->datatables->search(['ruangan_nama', 'ruangan_status']);
+        $this->datatables->search(['ruangan_nama', 'ruangan_status', 'ruangan_id']);
         $this->datatables->select('ruangan_nama, ruangan_status, ruangan_id');
         $this->datatables->from('ruangan as a');
         $this->datatables->where('a.status', '1');

@@ -12,19 +12,19 @@ class Dummy extends Seeder
 
         $ruanganData = [
             [
-                'ruangan_nama' => 'Ruamgan #1',
+                'ruangan_nama' => 'Ruangan #1',
                 'ruangan_status' => 1
             ],
             [
-                'ruangan_nama' => 'Ruamgan #2',
+                'ruangan_nama' => 'Ruangan #2',
                 'ruangan_status' => 1
             ],
             [
-                'ruangan_nama' => 'Ruamgan #3',
+                'ruangan_nama' => 'Ruangan #3',
                 'ruangan_status' => 1
             ],
             [
-                'ruangan_nama' => 'Ruamgan #4',
+                'ruangan_nama' => 'Ruangan #4',
                 'ruangan_status' => 1
             ],
         ];
@@ -54,7 +54,7 @@ class Dummy extends Seeder
 
         $dataKomunitas = [
             [
-                'komunitas_logo' => 'default.jpg',
+                'komunitas_logo' => 'default_user.jpg',
                 'komunitas_nama'  => 'Genpi Blitar',
                 'bidang' => 'Pariwisata',
                 'jml_anggota' => '20',
@@ -65,7 +65,7 @@ class Dummy extends Seeder
                 'user_group_id' => '2', //default member
             ],
             [
-                'komunitas_logo' => 'default.jpg',
+                'komunitas_logo' => 'default_user.jpg',
                 'komunitas_nama'  => 'PENA',
                 'bidang' => 'Hobi',
                 'jml_anggota' => '12',
