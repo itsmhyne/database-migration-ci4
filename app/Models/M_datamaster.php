@@ -38,7 +38,7 @@ class M_datamaster extends BaseModel
     {
         // update status menjadi 0 agar tidak tampil dalam tabel
         $setData = $this->setCrudIdentity('delete');
-        $eksekusi = $this->db->table('ruangan')
+        $this->db->table('ruangan')
             ->where('ruangan_id', $id)
             ->set($setData)
             ->update();

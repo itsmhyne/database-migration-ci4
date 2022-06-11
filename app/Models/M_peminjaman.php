@@ -60,4 +60,16 @@ class M_peminjaman extends BaseModel
         // notifikasi 
         $this->resp_S('Ruangan Berhasil Dikembalikan');
     }
+
+    function getBuktiPeminjaman($peminjaman_id)
+    {
+        $data['peminjaman'] = $this->db->table('peminjaman as p')
+            ->select('peminjaman_nomor, ruangan_nama, p.created_time, komunitas_nama')
+            ->join('ruangan as r', 'r.ruangan_id = r.ruangan_id')
+            ->join('komunitas as k', 'k.komunitas_id = p.komunitas_id')
+            ->get()
+            ->getRow();
+
+        return $data;
+    }
 }

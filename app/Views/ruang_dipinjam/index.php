@@ -148,4 +148,10 @@
             }
         });
     }
+
+    function print_peminjaman(t) {
+        var id = t.getAttribute('target-id')
+        var x = window.open(base_url('/Peminjaman/ruangan_dipinjam_print_bukti/' + id), '_blank');
+        x.focus;
+    }
 </script>

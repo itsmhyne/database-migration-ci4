@@ -52,11 +52,6 @@ class Peminjaman extends BaseController
         // generate nomor peminjaman
         $no_peminjaman = $this->no_transaksi('PN', 'peminjaman', ['DATE_FORMAT(created_time, "%Y%m")' => date('Ym')]);
         $response = $this->m->room_pinjam($room_id, $no_peminjaman);
-        if ($response) {
-            print_r(json_encode(array('status' => 1, 'msg' => 'Berhasil Dipinjam!')));
-        } else {
-            print_r(json_encode(array('status' => 0, 'msg' => 'Gagal Dipinjam!')));
-        }
     }
 
     public function no_transaksi($kode, $table, $params)
@@ -90,12 +85,12 @@ class Peminjaman extends BaseController
         foreach ($m as $key => $value) {
             if ($m[$key]['peminjaman_status'] == 1) {
                 $m[$key]['peminjaman_status'] = '<span class="badge bg-warning">Sedang Dipinjam</span>';
+                $m[$key]['peminjaman_nomor'] = $m[$key]['peminjaman_nomor'] . '<button class="btn btn-icon btn-sm btn-info ml-2 dt-print" target-id="' . $m[$key]['peminjaman_id'] . '" onclick="print_peminjaman(this)"><i class="fas fa-print"></i></button>';
                 $m[$key]['peminjaman_id'] = '<button class="btn btn-sm btn-warning btn-icon dt-kembalikan" ruangan-id="' . $m[$key]['ruangan_id'] . '" target-id="' . $m[$key]['peminjaman_id'] . '" onclick="dt_kembalikan(this)"><i class="fas fa-sign-in-alt mr-2"></i>Kembalikan</button>';
             } else {
                 $m[$key]['peminjaman_status'] = '<span class="badge bg-success">Dikembalikan</span>';
                 $m[$key]['peminjaman_id'] = '<button class="btn btn-sm btn-success btn-icon disabled"><i class="fas fa-check-circle mr-2"></i>Dikembalikan</button>';
             }
-            $m[$key]['peminjaman_nomor'] = $m[$key]['peminjaman_nomor'] . '<button class="btn btn-icon btn-sm btn-info ml-2"><i class="fas fa-print"></i></button>';
         }
         $this->datatables->render_no_keys($m);
     }
@@ -104,11 +99,12 @@ class Peminjaman extends BaseController
     {
         $peminjaman_id = $_POST['id'];
         $ruangan_id = $_POST['ruangan'];
-        $response = $this->m->ruangan_dipinjam_dikembalikan($peminjaman_id, $ruangan_id);
-        if ($response) {
-            print_r(json_encode(array('status' => 1, 'msg' => 'Ruangan Berhasil Dikembalikan!')));
-        } else {
-            print_r(json_encode(array('status' => 0, 'msg' => 'Ruangan Gagal Dikembalikan')));
-        }
+        $this->m->ruangan_dipinjam_dikembalikan($peminjaman_id, $ruangan_id);
+    }
+
+    public function ruangan_dipinjam_print_bukti($peminjaman_id)
+    {
+        $data = $this->m->getBuktiPeminjaman($peminjaman_id);
+        return view('ruang_dipinjam/printBukti', $data);
     }
 }

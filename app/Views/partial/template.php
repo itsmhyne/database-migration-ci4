@@ -124,7 +124,7 @@
                                 <a href="<?= base_url('Peminjaman/index') ?>" class="nav-link">
                                     <i class="nav-icon fas fa-home"></i>
                                     <p>
-                                        Peminjaman
+                                        Ruangan
                                     </p>
                                 </a>
                             </li>
@@ -132,7 +132,7 @@
                                 <a href="<?= base_url('Peminjaman/ruang_dipinjam') ?>" class="nav-link">
                                     <i class="nav-icon fas fa-house-damage"></i>
                                     <p>
-                                        Ruang Dipinjam
+                                        Riwayat Peminjaman
                                     </p>
                                 </a>
                             </li>
@@ -241,6 +241,11 @@
     <!-- Toastr -->
     <script src="<?= base_url('public/assets') ?>/dist/js/toastr.min.js"></script>
     <!-- AdminLTE App -->
+    <script>
+        function base_url(url) {
+            return "<?php echo base_url() ?>" + url;
+        }
+    </script>
 </body>
 
 </html>

@@ -57,11 +57,6 @@ class Datamaster extends BaseController
     public function room_delete()
     {
         $room_id = $_POST['id'];
-        $response = $this->m->room_delete($room_id);
-        if ($response) {
-            print_r(json_encode(array('status' => 1, 'msg' => 'berhasil dihapus!')));
-        } else {
-            print_r(json_encode(array('status' => 0, 'msg' => 'gagal dihapus!')));
-        }
+        $this->m->room_delete($room_id);
     }
 }
