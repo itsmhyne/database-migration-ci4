@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title><?= APP_NAMESPACE ?></title>
+    <title><?= APP_NAME ?></title>
 
     <link rel="shortcut icon" type="image/x-icon" href="<?= base_url('public/assets/icon') ?>/<?= APP_ICON ?>">
     <!-- Google Font: Source Sans Pro -->
@@ -23,7 +23,7 @@
     <div class="register-box">
         <div class="card card-outline card-primary">
             <div class="card-header text-center">
-                <a href="#" class="h1"><b><?= APP_NAMESPACE ?></b></a>
+                <a href="#" class="h1"><b><?= APP_NAME ?></b></a>
             </div>
             <div class="card-body">
                 <p class="login-box-msg">Register a new membership</p>

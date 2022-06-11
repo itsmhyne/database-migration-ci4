@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title><?= APP_NAMESPACE ?></title>
+    <title><?= APP_NAME ?></title>
 
     <!-- icon -->
     <link rel="shortcut icon" type="image/x-icon" href="<?= base_url('public/assets/icon') ?>/<?= APP_ICON ?>">
@@ -79,7 +79,7 @@
             <!-- Brand Logo -->
             <a href="<?= base_url('') ?>" class="brand-link">
                 <img src="<?= base_url('public/assets') ?>/icon/room.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-                <span class="brand-text font-weight-light"><?= APP_NAMESPACE ?></span>
+                <span class="brand-text font-weight-light"><?= APP_NAME ?></span>
             </a>
 
             <!-- Sidebar -->
@@ -196,7 +196,7 @@
             <div class="float-right d-none d-sm-block">
                 <b>Version</b> 1.0
             </div>
-            <strong>Copyright &copy; <?= date('Y') ?> <a href="<?= base_url() ?>">AppName</a>.</strong> All rights reserved.
+            <strong>Copyright &copy; <?= date('Y') ?> <a href="<?= base_url() ?>"><?= APP_NAME ?></a>.</strong> All rights reserved.
         </footer>
 
         <!-- Control Sidebar -->
