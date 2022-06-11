@@ -4,10 +4,10 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>AppName</title>
+    <title><?= APP_NAMESPACE ?></title>
 
     <!-- icon -->
-    <link rel="shortcut icon" type="image/x-icon" href="<?= base_url('public/assets/icon/room.png') ?>">
+    <link rel="shortcut icon" type="image/x-icon" href="<?= base_url('public/assets/icon') ?>/<?= APP_ICON ?>">
     <!-- jQuery -->
     <script src="<?= base_url('public/assets') ?>/plugins/jquery/jquery.min.js"></script>
     <!-- Google Font: Source Sans Pro -->
@@ -79,7 +79,7 @@
             <!-- Brand Logo -->
             <a href="<?= base_url('') ?>" class="brand-link">
                 <img src="<?= base_url('public/assets') ?>/icon/room.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-                <span class="brand-text font-weight-light">AppName</span>
+                <span class="brand-text font-weight-light"><?= APP_NAMESPACE ?></span>
             </a>
 
             <!-- Sidebar -->

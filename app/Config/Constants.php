@@ -11,7 +11,8 @@
 // NOTE: changing this will require manually modifying the
 // existing namespaces of App\* namespaced-classes.
 //
-defined('APP_NAMESPACE') || define('APP_NAMESPACE', 'App');
+defined('APP_NAMESPACE') || define('APP_NAMESPACE', 'Lending Room');
+defined('APP_ICON') || define('APP_ICON', 'room.png');
 
 /*
 |--------------------------------------------------------------------------
