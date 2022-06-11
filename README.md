@@ -1,6 +1,6 @@
 # Aplikasi Peminjaman Ruangan
 
-Aplikasi ini dibuat dengan framwork Codeigniter 4 versi 4.0.0
+Aplikasi ini dibuat dengan framework Codeigniter 4 versi 4.0.0
 
 
 ## Instalasi Project
