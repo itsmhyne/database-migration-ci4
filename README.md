@@ -44,9 +44,9 @@ Aplikasi ini dibuat dengan framwork Codeigniter 4 versi 4.0.0
 #### Ubah nama aplikasi
 
 - Buka folder app/Config/Constants.php
-- Pada line 14, ubah menjadi
+- Pada line 16, ubah menjadi
 ```bash
-defined('APP_NAMESPACE') || define('APP_NAMESPACE', 'Nama Aplikasimu');
+defined('APP_NAME') || define('APP_NAME', 'Nama Aplikasimu');
 ```
 
 #### Ubah icon aplikasi
