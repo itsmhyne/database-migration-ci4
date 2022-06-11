@@ -26,6 +26,7 @@ class System
 	{
 
 		$data['session_name'] = $this->session->name;
+		$data['session_foto'] = $this->session->user_foto;
 		$data['session_user_id'] = $this->session->user_id;
 		$data['session_group_id'] = $this->session->group_id;
 		// $data['sidebar_parent'] = $this->db->table('_sys_sidebar')->where(['sidebar_parent' => '0', 'status' => '1'])->get()->getResult();

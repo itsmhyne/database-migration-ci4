@@ -21,6 +21,11 @@ class SysUsers extends Migration
 				'type'           => 'VARCHAR',
 				'constraint'     => 50
 			],
+			'user_foto'       => [
+				'type'           => 'VARCHAR',
+				'constraint'     => 50,
+				'default' => 'default_admin.png'
+			],
 			'user_phone'       => [
 				'type'           => 'VARCHAR',
 				'constraint'     => 50

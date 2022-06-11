@@ -18,7 +18,7 @@ class M_auth extends BaseModel
         // cek username dan email
         $data['password'] = md5($data['password']);
         $db = $this->db->table('_sys_user')
-            ->select('user_name, user_id, user_group_id')
+            ->select('user_name, user_id, user_group_id, user_foto')
             ->groupStart()
             ->where('username', $data['email'])
             ->orWhere('email', $data['email'])
@@ -60,6 +60,7 @@ class M_auth extends BaseModel
             'user_id' => $data->user_id,
             'group_id' => $data->user_group_id,
             'is_logged_in' => true,
+            'user_foto' => $data->user_foto
         );
 
         $session->set($array);
