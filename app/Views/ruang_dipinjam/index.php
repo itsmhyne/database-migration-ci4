@@ -6,8 +6,8 @@
                 <h1><?= $menu ?></h1>
             </div>
             <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right d-none">
-                    <button class="btn btn-success btn-sm btn-icon" onclick="dt_add(this)"><i class="fa fa-plus"></i> Tambahkan Ruangan</button>
+                <ol class="breadcrumb float-sm-right">
+                    <button class="btn btn-success btn-sm btn-icon" onclick="dt_rekap(this)"><i class="fa fa-print"></i> Print Rekap</button>
                 </ol>
             </div>
         </div>
@@ -51,38 +51,6 @@
 
 </section>
 <!-- /.content -->
-
-<!-- modal -->
-<div class="modal fade" id="modal_ruangan" aria-hidden="true" style="display: none;">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <form id="form-ruangan" method="post">
-                <div class="modal-header">
-                    <h4 class="modal-title">Form</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body" id="modal-body-room">
-
-                </div>
-                <div class="modal-footer justify-content-between">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
-                    <button type="submit" class="btn btn-primary">Simpan</button>
-                </div>
-            </form>
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-</div>
-<!-- end modal -->
-
-<!-- button -->
-<div id="dt_btn_utils" class="d-none">
-    <button class="btn btn-sm btn-warning btn-icon dt-delete"><i class="fas fa-sign-in-alt mr-2"></i>Pinjam</button>
-</div>
-<!-- end button -->
 
 <script>
     $(document).ready(function() {
@@ -152,6 +120,11 @@
     function print_peminjaman(t) {
         var id = t.getAttribute('target-id')
         var x = window.open(base_url('/Peminjaman/ruangan_dipinjam_print_bukti/' + id), '_blank');
+        x.focus;
+    }
+
+    function dt_rekap() {
+        var x = window.open(base_url('/Peminjaman/print_rekap'), '_blank');
         x.focus;
     }
 </script>

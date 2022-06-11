@@ -23,7 +23,7 @@ class Peminjaman extends BaseController
 
     public function index()
     {
-        $data['menu'] = "Peminjaman Ruangan";
+        $data['menu'] = "Ruangan";
         $this->lib_sys->view('peminjaman/index', $data);
     }
 
@@ -68,7 +68,7 @@ class Peminjaman extends BaseController
 
     public function ruang_dipinjam()
     {
-        $data['menu'] = "Ruangan Dipinjam";
+        $data['menu'] = "Riwayat Peminjaman";
         $this->lib_sys->view('ruang_dipinjam/index', $data);
     }
 
@@ -106,5 +106,11 @@ class Peminjaman extends BaseController
     {
         $data = $this->m->getBuktiPeminjaman($peminjaman_id);
         return view('ruang_dipinjam/printBukti', $data);
+    }
+
+    public function print_rekap()
+    {
+        $data = $this->m->getPrintRekap();
+        return view('ruang_dipinjam/printRekap', $data);
     }
 }

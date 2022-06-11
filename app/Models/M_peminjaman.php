@@ -72,4 +72,19 @@ class M_peminjaman extends BaseModel
 
         return $data;
     }
+
+    function getPrintRekap()
+    {
+        $user_id = $this->session->get('user_id');
+        $data['peminjaman'] = $this->db->table('peminjaman as p')
+            ->select('peminjaman_nomor, ruangan_nama, p.created_time, komunitas_nama, peminjaman_status')
+            ->join('ruangan as r', 'r.ruangan_id = p.ruangan_id')
+            ->join('komunitas as k', 'k.komunitas_id = p.komunitas_id')
+            ->where('p.komunitas_id', $user_id)
+            ->orderBy('peminjaman_status', 'asc')
+            ->get()
+            ->getResultArray();
+
+        return $data;
+    }
 }

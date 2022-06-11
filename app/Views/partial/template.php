@@ -130,7 +130,7 @@
                             </li>
                             <li class="nav-item">
                                 <a href="<?= base_url('Peminjaman/ruang_dipinjam') ?>" class="nav-link">
-                                    <i class="nav-icon fas fa-house-damage"></i>
+                                    <i class="nav-icon fas fa-history"></i>
                                     <p>
                                         Riwayat Peminjaman
                                     </p>
