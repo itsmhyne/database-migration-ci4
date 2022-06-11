@@ -87,6 +87,7 @@ class allSeed extends Seeder
         $dataUser = [
             [
                 'user_name' => 'John Doe',
+                'user_foto' => 'default_admin.png',
                 'user_phone'  => '087624132412',
                 'email' => 'jhondoe@gmail.com',
                 'user_address' => 'address example',
@@ -96,6 +97,7 @@ class allSeed extends Seeder
             ],
             [
                 'user_name' => 'Dighoff Rosy',
+                'user_foto' => 'default_admin.png',
                 'user_phone'  => '087624132412',
                 'email' => 'dighoffr@gmail.com',
                 'user_address' => 'address example',
