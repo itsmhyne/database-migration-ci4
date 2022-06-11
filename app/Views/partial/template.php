@@ -203,12 +203,25 @@
                                         <p>Ruangan</p>
                                     </a>
                                 </li>
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Komunitas</p>
+                                    </a>
+                                </li>
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a href="https://adminlte.io/docs/3.1/" class="nav-link">
+                            <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-users"></i>
-                                <p>Komunitas
+                                <p>Manajemen Admin
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-user"></i>
+                                <p>Profile
                                 </p>
                             </a>
                         </li>
