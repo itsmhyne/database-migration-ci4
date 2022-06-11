@@ -17,7 +17,7 @@ class M_peminjaman extends BaseModel
         $dataPeminjam = $this->setCrudIdentity('insert', [
             'peminjaman_nomor' => $no_peminjaman,
             'ruangan_id' => $room_id,
-            'user_id' => $user_id
+            'komunitas_id' => $user_id
         ]);
         $tabelPeminjaman->set($dataPeminjam)
             ->insert();

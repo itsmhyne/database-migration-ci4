@@ -24,7 +24,7 @@ class Peminjaman extends Migration
 				'type'           => 'INT',
 				'constraint'     => '4'
 			],
-			'user_id'       => [
+			'komunitas_id'       => [
 				'type'           => 'INT',
 				'constraint'     => '4'
 			],
