@@ -127,5 +127,63 @@ class Dummy extends Seeder
             // insert semua data ke tabel
             $this->db->table('_sys_group')->insert($data);
         }
+
+        // seeder bulan
+
+        $bulanData = [
+            [
+                'bulan_kode' => '01',
+                'bulan_nama' => 'Januari'
+            ],
+            [
+                'bulan_kode' => '02',
+                'bulan_nama' => 'Februari'
+            ],
+            [
+                'bulan_kode' => '03',
+                'bulan_nama' => 'Maret'
+            ],
+            [
+                'bulan_kode' => '04',
+                'bulan_nama' => 'April'
+            ],
+            [
+                'bulan_kode' => '05',
+                'bulan_nama' => 'Mei'
+            ],
+            [
+                'bulan_kode' => '06',
+                'bulan_nama' => 'Juni'
+            ],
+            [
+                'bulan_kode' => '07',
+                'bulan_nama' => 'Juli'
+            ],
+            [
+                'bulan_kode' => '08',
+                'bulan_nama' => 'Agustus'
+            ],
+            [
+                'bulan_kode' => '09',
+                'bulan_nama' => 'September'
+            ],
+            [
+                'bulan_kode' => '10',
+                'bulan_nama' => 'Oktober'
+            ],
+            [
+                'bulan_kode' => '11',
+                'bulan_nama' => 'November'
+            ],
+            [
+                'bulan_kode' => '12',
+                'bulan_nama' => 'Desember'
+            ],
+        ];
+
+        foreach ($bulanData as $data) {
+            // insert semua data ke tabel
+            $this->db->table('bulan')->insert($data);
+        }
     }
 }

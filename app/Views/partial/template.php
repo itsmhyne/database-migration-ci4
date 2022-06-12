@@ -28,6 +28,20 @@
     <link rel="stylesheet" href="<?= base_url('public/assets') ?>/dist/css/select2-bootstrap4.min.css">
     <link rel="stylesheet" href="<?= base_url('public/assets') ?>/dist/css/select2.css">
     <script src="<?= base_url('public/assets') ?>/dist/js/select2.min.js"></script>
+    <!-- ChartJS -->
+    <script src="<?= base_url('public/assets') ?>/plugins/chart.js/Chart.min.js"></script>
+
+    <style>
+        select[readonly]+span.select2-container span.select2-selection {
+            background-color: #ECECEC;
+            pointer-events: none;
+        }
+    </style>
+    <script type="text/javascript">
+        $.fn.select2.defaults.set("theme", "bootstrap4");
+        $.fn.datepicker.defaults.autoclose = true;
+        $.fn.datepicker.defaults.format = 'dd/mm/yyyy';
+    </script>
 </head>
 
 <body class="sidebar-mini layout-navbar-fixed layout-fixed">
@@ -245,6 +259,9 @@
         function base_url(url) {
             return "<?php echo base_url() ?>" + url;
         }
+        $(document).ready(function() {
+            $('.select2').select2()
+        });
     </script>
 </body>
 

@@ -29,6 +29,7 @@ class Peminjaman extends BaseController
 
     public function room_fetch()
     {
+        $user_id = $this->session->get('user_id');
         $this->datatables->search(['ruangan_nama', 'ruangan_status', 'ruangan_id']);
         $this->datatables->select('ruangan_nama, ruangan_status, ruangan_id');
         $this->datatables->from('ruangan as a');
@@ -80,6 +81,7 @@ class Peminjaman extends BaseController
         $this->datatables->from('peminjaman as p');
         $this->datatables->join('komunitas as k', 'k.komunitas_id = p.komunitas_id');
         $this->datatables->join('ruangan as r', 'r.ruangan_id = p.ruangan_id');
+        $this->datatables->where('p.komunitas_id', $user_id);
         $this->datatables->where('p.status', '1');
         $m = $this->datatables->get();
         foreach ($m as $key => $value) {
