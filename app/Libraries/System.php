@@ -344,7 +344,7 @@ class System
 				->getResultArray();
 			foreach ($peminjaman as $key => $value) {
 				$created_time = \date_create($value['created_time']);
-				\date_add($created_time, \date_interval_create_from_date_string('5 minutes'));
+				\date_add($created_time, \date_interval_create_from_date_string('2 hours'));
 				$date_input =  \date_format($created_time, 'Y-m-d H:i:s');
 				if (\strtotime($date_input) < \strtotime(date('Y-m-d H:i:s'))) {
 					// // update data ke table peminjaman
