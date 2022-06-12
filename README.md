@@ -23,6 +23,13 @@ Aplikasi ini dibuat dengan framework Codeigniter 4 versi 4.0.0
 ```bash
   localhost/nama_project
 ```
+
+## Update Project
+- Buka terminal dan ketikkan
+```bash
+  git pull 
+```
+
 ## Konfigurasi Aplikasi
 
 #### Ubah nama aplikasi
