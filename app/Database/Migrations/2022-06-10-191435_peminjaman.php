@@ -33,6 +33,11 @@ class Peminjaman extends Migration
 				'constraint'     => '4',
 				'default' => 1
 			],
+			'jumlah'       => [
+				'type'           => 'INT',
+				'constraint'     => '4',
+				'default' => 1
+			],
 			'created_time DATETIME DEFAULT CURRENT_TIMESTAMP',
 			'created_by' => [
 				'type'           => 'INT',
