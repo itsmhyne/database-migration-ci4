@@ -41,7 +41,7 @@ class M_peminjaman extends BaseModel
 
         // update data ke table peminjaman
         $tabelPeminjaman = $this->db->table('peminjaman');
-        $dataPeminjam = $this->setCrudIdentity('insert', [
+        $dataPeminjam = $this->setCrudIdentity('update', [
             'peminjaman_status' => 2, //dikembalikan
         ]);
         $tabelPeminjaman->set($dataPeminjam)
@@ -86,5 +86,37 @@ class M_peminjaman extends BaseModel
             ->getResultArray();
 
         return $data;
+    }
+
+    function ajukan_peminjaman()
+    {
+
+        $ruangan_id = $this->input->getPost('id');
+        $user_id = $this->session->get('user_id');
+
+        // cek pakah user sudah mengajukan peminjaman
+        $checkPeminjaman = $this->db->table('pengajuan')
+            ->where('ruangan_id', $ruangan_id)
+            ->where('komunitas_id', $user_id)
+            ->get()
+            ->getRow();
+
+        // jika sudah mengajukan
+        if ($checkPeminjaman) {
+            $this->resp_E('Anda sudah mengajukan peminjaman ruangan ini. Mohon tunggu konfirmasi dari admin');
+        } else {
+
+            // insert ke table pengajuan
+            $tabelPengajuan = $this->db->table('pengajuan');
+            $dataPengajuan = $this->setCrudIdentity('insert', [
+                'ruangan_id' => $ruangan_id,
+                'komunitas_id' => $user_id
+            ]);
+            $tabelPengajuan->set($dataPengajuan)
+                ->insert();
+
+            // send notofikasi
+            $this->resp_S('Pengajuan peminjaman ruangan berhasil. Mohon tunggu konfirmasi dari Admin');
+        }
     }
 }

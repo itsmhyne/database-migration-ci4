@@ -55,6 +55,11 @@ class Peminjaman extends BaseController
         $response = $this->m->room_pinjam($room_id, $no_peminjaman);
     }
 
+    public function ajukan_peminjaman()
+    {
+        $this->m->ajukan_peminjaman();
+    }
+
     public function no_transaksi($kode, $table, $params)
     {
         $count = $this->db->table($table)
@@ -114,5 +119,34 @@ class Peminjaman extends BaseController
     {
         $data = $this->m->getPrintRekap();
         return view('ruang_dipinjam/printRekap', $data);
+    }
+
+    // ADMIN - DAFTAR PEMINJAMAN
+
+    public function daftar_peminjaman()
+    {
+        $data['menu'] = "Riwayat Peminjaman Ruangan";
+        $this->lib_sys->view('peminjaman/daftar_peminjaman', $data);
+    }
+
+    public function daftar_peminjaman_fetch()
+    {
+        $this->datatables->search(['peminjaman_nomor', 'ruangan_nama', 'peminjaman_status', 'peminjaman_id']);
+        $this->datatables->select('peminjaman_nomor, ruangan_nama, peminjaman_status, p.created_time, p.updated_time, peminjaman_id, p.ruangan_id');
+        $this->datatables->from('peminjaman as p');
+        $this->datatables->join('komunitas as k', 'k.komunitas_id = p.komunitas_id');
+        $this->datatables->join('ruangan as r', 'r.ruangan_id = p.ruangan_id');
+        $this->datatables->where('p.status', '1');
+        $m = $this->datatables->get();
+        foreach ($m as $key => $value) {
+            if ($m[$key]['peminjaman_status'] == 1) {
+                $m[$key]['peminjaman_status'] = '<span class="badge bg-primary">Dipinjam</span>';
+                $m[$key]['peminjaman_id'] = '<button class="btn btn-sm btn-warning btn-icon dt-pinjam" target-id="' . $m[$key]['ruangan_id'] . '" onclick="dt_kembalikan(this)"><i class="fas fa-sign-in-alt mr-2"></i>Kembalikan</button>';
+            } else {
+                $m[$key]['peminjaman_status'] = '<span class="badge bg-danger">Dikembalikan</span>';
+                $m[$key]['peminjaman_id'] = '<button class="btn btn-sm btn-warning btn-icon disabled"><i class="fas fa-sign-in-alt mr-2"></i>Dikembalikan</button>';
+            }
+        }
+        $this->datatables->render_no_keys($m);
     }
 }

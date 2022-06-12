@@ -64,10 +64,14 @@
 <!-- /.row -->
 
 <?php
-
-foreach ($ruangan as $key => $value) {
-    $ruangan_id[] = $value['ruangan_nama'];
-    $peminjaman[] = $value['jumlah'];
+if (count($ruangan) > 0) {
+    foreach ($ruangan as $key => $value) {
+        $ruangan_id[] = $value['ruangan_nama'];
+        $peminjaman[] = $value['jumlah'];
+    }
+} else {
+    $ruangan_id[] = 0;
+    $peminjaman[] = 0;
 }
 
 ?>

@@ -29,6 +29,7 @@ class System
 		$data['session_foto'] = $this->session->user_foto;
 		$data['session_user_id'] = $this->session->user_id;
 		$data['session_group_id'] = $this->session->group_id;
+		$data['jumlahPengajuan'] = $this->db->table('pengajuan')->select('count(0) as pengajuan')->where('status', 1)->get()->getRow('pengajuan');
 		// $data['sidebar_parent'] = $this->db->table('_sys_sidebar')->where(['sidebar_parent' => '0', 'status' => '1'])->get()->getResult();
 		if (is_array($html)) {
 			$data = array_merge($data, $html);

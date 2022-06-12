@@ -29,7 +29,8 @@
                                         <thead>
                                             <tr class="text-center">
                                                 <th>Nama Ruangan</th>
-                                                <th width="20%">Status</th>
+                                                <th width="30%">Nama yang Mengajukan</th>
+                                                <th>Waktu Pengajuan</th>
                                                 <th width="15%">Aksi</th>
                                             </tr>
                                         </thead>
@@ -51,43 +52,11 @@
 </section>
 <!-- /.content -->
 
-<!-- modal -->
-<div class="modal fade" id="modal_ruangan" aria-hidden="true" style="display: none;">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <form id="form-ruangan" method="post">
-                <div class="modal-header">
-                    <h4 class="modal-title">Form</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body" id="modal-body-room">
-
-                </div>
-                <div class="modal-footer justify-content-between">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
-                    <button type="submit" class="btn btn-primary">Simpan</button>
-                </div>
-            </form>
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-</div>
-<!-- end modal -->
-
-<!-- button -->
-<div id="dt_btn_utils" class="d-none">
-    <button class="btn btn-sm btn-warning btn-icon dt-delete"><i class="fas fa-sign-in-alt mr-2"></i>Pinjam</button>
-</div>
-<!-- end button -->
-
 <script>
     $(document).ready(function() {
         $('#tabel-data').DataTable({
             ajax: {
-                url: "<?php echo base_url('Peminjaman/room_fetch') ?>",
+                url: "<?php echo base_url('Pengajuan/daftar_pengajuan_fetch') ?>",
                 dataSrc: "data",
                 type: "POST"
             },
@@ -100,7 +69,10 @@
                     data: 1
                 },
                 {
-                    data: 2,
+                    data: 2
+                },
+                {
+                    data: 3,
                     searchable: false,
                     orderable: false
                 },
@@ -110,47 +82,13 @@
 
     });
 
-    function dt_add(t) {
-        $.LoadingOverlay("show");
-        $.get('<?php echo base_url('Peminjaman/room_modal/room_add') ?>').done(function(data) {
-            $.LoadingOverlay("hide");
-            $('#modal-body-room').html(data);
-            $('#modal_ruangan').modal('show')
-        });
-    }
 
-    function dt_edit(t) {
-        $.LoadingOverlay("show");
-        $.get('<?php echo base_url('Peminjaman/room_modal/room_edit') ?>', {
-            'ruangan_id': $(t).attr('target-id')
-        }).done(function(data) {
-            $.LoadingOverlay("hide");
-            $('#modal-body-room').html(data);
-            $('#modal_ruangan').modal('show')
-        });
-    }
-
-    $('#form-ruangan').submit(function(event) {
-        $.LoadingOverlay("show");
-        $.post('<?php echo base_url('Peminjaman/room_save') ?>', $(this).serialize(), function(response, textStatus, xhr) {
-            if (response.status == true) {
-                toastr.success(response.msg);
-                $('#tabel-data').DataTable().ajax.reload();
-                $('#modal_ruangan').modal('hide');
-                $.LoadingOverlay("hide");
-            } else {
-                toastr.error(response.msg);
-                $.LoadingOverlay("hide");
-            }
-        }, "json");
-        return false;
-    });
-
-    function dt_pinjam(t) {
+    function dt_konfirmasi(t) {
         var id = t.getAttribute('target-id');
+        var user = t.getAttribute('user-id');
         swal({
-            title: 'Informasi!',
-            text: 'Ajukan peminjaman ruangan ini?',
+            title: 'Peringatan!',
+            text: 'Konfirmasi pengajuan peminjaman ruangan untuk user ini?',
             type: 'info',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
@@ -159,8 +97,9 @@
             confirmButtonText: 'Ya',
         }).then(function() {
             $.LoadingOverlay("show");
-            $.post('<?php echo base_url('Peminjaman/ajukan_peminjaman') ?>', {
-                'id': id
+            $.post('<?php echo base_url('Pengajuan/konfirmasi_pengajuan') ?>', {
+                'id': id,
+                'user': user
             }, function(result, textStatus, xhr) {
                 $.LoadingOverlay("hide");
                 if (result.status == 1) {

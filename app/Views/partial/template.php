@@ -72,18 +72,10 @@
                         <i class="fas fa-expand-arrows-alt"></i>
                     </a>
                 </li>
-
-                <!-- Users Dropdown Menu -->
-                <li class="nav-item dropdown">
-                    <a class="nav-link" data-toggle="dropdown" href="#">
-                        <i class="fas fa-user"></i>
+                <li class="nav-item">
+                    <a href="<?= base_url('Auth/Logout') ?>" class="nav-link" onclick="logout()">
+                        <i class="fa fa-sign-out-alt mr-2"></i> Sign Out
                     </a>
-                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                        <div class="dropdown-divider"></div>
-                        <a href="<?= base_url('Auth/logout') ?>" class="dropdown-item">
-                            <i class="fa fa-sign-out-alt mr-2"></i> Sign Out
-                        </a>
-                    </div>
                 </li>
             </ul>
         </nav>
@@ -136,7 +128,7 @@
                         </li>
                         <?php if ($session_group_id == 2) : ?>
                             <li class="nav-item">
-                                <a href="<?= base_url('Peminjaman/index') ?>" class="nav-link">
+                                <a href="<?= base_url('Peminjaman') ?>" class="nav-link">
                                     <i class="nav-icon fas fa-home"></i>
                                     <p>
                                         Ruangan
@@ -154,10 +146,19 @@
                         <?php endif; ?>
                         <?php if ($session_group_id == 1) : ?>
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href="<?= base_url('Peminjaman/daftar_peminjaman') ?>" class="nav-link">
                                     <i class="nav-icon fas fa-home"></i>
                                     <p>
-                                        Daftar Peminjaman
+                                        Riwayat Peminjaman
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="<?= base_url('Pengajuan') ?>" class="nav-link">
+                                    <i class="nav-icon fas fa-home"></i>
+                                    <p>
+                                        Pengajuan
+                                        <span class="badge badge-info right"><?= $jumlahPengajuan ?></span>
                                     </p>
                                 </a>
                             </li>
