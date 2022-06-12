@@ -30,6 +30,7 @@
     <script src="<?= base_url('public/assets') ?>/dist/js/select2.min.js"></script>
     <!-- ChartJS -->
     <script src="<?= base_url('public/assets') ?>/plugins/chart.js/Chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.0.0/chartjs-plugin-datalabels.min.js" integrity="sha512-R/QOHLpV1Ggq22vfDAWYOaMd5RopHrJNMxi8/lJu8Oihwi4Ho4BRFeiMiCefn9rasajKjnx9/fTQ/xkWnkDACg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <style>
         select[readonly]+span.select2-container span.select2-selection {
@@ -39,8 +40,8 @@
     </style>
     <script type="text/javascript">
         $.fn.select2.defaults.set("theme", "bootstrap4");
-        $.fn.datepicker.defaults.autoclose = true;
-        $.fn.datepicker.defaults.format = 'dd/mm/yyyy';
+        // $.fn.datepicker.defaults.autoclose = true;
+        // $.fn.datepicker.defaults.format = 'dd/mm/yyyy';
     </script>
 </head>
 

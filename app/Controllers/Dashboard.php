@@ -61,6 +61,7 @@ class Dashboard extends BaseController
         }
         $this->data['jumlah'] = $finalTotalGrafikPeminjaman;
         $this->data['labels'] = $data['labels'];
+        $this->data['ruangan'] = $this->m->getGrafikRuangan();
         $this->lib_sys->view_modal('dashboard/grafik', $this->data);
     }
 }

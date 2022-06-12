@@ -5,7 +5,7 @@ namespace App\Models;
 class M_dashboard extends BaseModel
 {
 
-    function getGrafikPeminjamanew()
+    function getGrafikRuangan()
     {
         return $this->db->table('peminjaman as p')
             ->select('ruangan_nama, sum(jumlah) as jumlah')
