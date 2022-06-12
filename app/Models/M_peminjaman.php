@@ -98,6 +98,7 @@ class M_peminjaman extends BaseModel
         $checkPeminjaman = $this->db->table('pengajuan')
             ->where('ruangan_id', $ruangan_id)
             ->where('komunitas_id', $user_id)
+            ->where('status', 1)
             ->get()
             ->getRow();
 

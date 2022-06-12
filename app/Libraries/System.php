@@ -2,6 +2,7 @@
 
 namespace App\Libraries;
 
+use App\Models\M_peminjaman;
 use Config\Database;
 
 class System
@@ -20,6 +21,7 @@ class System
 		$this->session = session();
 		$this->db = Database::connect();
 		// $this->_ci = &get_instance();
+		$this->m = new M_peminjaman();
 	}
 
 	function view($html, $data = array())
@@ -330,4 +332,42 @@ class System
 	// 	$this->_ci->db->where(['sidebar_parent' => $sidebar_id]);
 	// 	return $this->_ci->db->get('_sys_sidebar')->num_rows();
 	// }
+
+	function update_peminjaman()
+	{
+		$user_id = $this->session->get('user_id');
+		$group = $this->session->get('group_id');
+		if ($this->session->get('group_id') == 1) {
+			$peminjaman = $this->db->table('peminjaman')
+				->where('peminjaman_status', 1)
+				->get()
+				->getResultArray();
+			foreach ($peminjaman as $key => $value) {
+				$created_time = \date_create($value['created_time']);
+				\date_add($created_time, \date_interval_create_from_date_string('5 minutes'));
+				$date_input =  \date_format($created_time, 'Y-m-d H:i:s');
+				if (\strtotime($date_input) < \strtotime(date('Y-m-d H:i:s'))) {
+					// // update data ke table peminjaman
+					$tabelPeminjaman = $this->db->table('peminjaman');
+					$dataPeminjam =  [
+						'peminjaman_status' => 2, //
+						'updated_time' => date('Y-m-d H:i:s'),
+						'updated_by' => $user_id
+					];
+					$tabelPeminjaman->set($dataPeminjam)
+						->where('peminjaman_id', $value['peminjaman_id'])
+						->update();
+
+					// update status ruangan
+					$tabelRuangan = $this->db->table('ruangan');
+					$dataRuangan =  [
+						'ruangan_status' => 1 // status di ubah menjadi tersedia
+					];
+					$tabelRuangan->set($dataRuangan)
+						->where('ruangan_id', $value['ruangan_id'])
+						->update();
+				}
+			}
+		}
+	}
 }

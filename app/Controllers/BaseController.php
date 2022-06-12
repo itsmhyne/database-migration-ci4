@@ -52,6 +52,8 @@ class BaseController extends Controller
 		$this->datatables = new Datatables();
 		$this->lib_sys->check_is_login();
 		$this->input = Services::request();
+		// auto update session peminjaman ruang
+		$this->lib_sys->update_peminjaman();
 	}
 
 	protected function resp_E($msg, $data = [])
