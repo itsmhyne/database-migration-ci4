@@ -9,8 +9,8 @@ Aplikasi ini dibuat dengan framework Codeigniter 4 versi 4.0.0
 ```bash
   git clone https://github.com/itsmhyne/database-migration-ci4.git
 ```
-- Konfigurasi Database pada Project
-- Buat Database
+- Konfigurasi Database pada file App/Config/Database.php
+- Sesuaikan untuk nama database dan password jika ada. Nama database default adalah learn jika nama dan database learn belum ada silakan buat database learn terlebih dahulu. Nama database tidak harus bernama learn, bisa bernam lain selama database itu ada dalam komputer anda 
 - Jalankan Migrasi Database
 ```bash
   php spark migrate
