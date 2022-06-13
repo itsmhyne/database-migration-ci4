@@ -48,8 +48,15 @@ class M_manajemen extends BaseModel
             ->where('username', $username)
             ->get()->getRow();
 
+        $checkEmail = $this->db->table('_sys_user')
+            ->select('user_name, user_id, user_group_id, user_foto')
+            ->where('email', $email)
+            ->get()->getRow();
+
         if ($checkUsername) {
             $this->resp_E('Username sudah Digunakan');
+        } else if ($checkEmail) {
+            $this->resp_E('Email sudah Digunakan');
         } else {
             // insert ke table pengajuan
             $tabelUser = $this->db->table('_sys_user');

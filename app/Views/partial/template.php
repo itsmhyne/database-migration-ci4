@@ -43,6 +43,45 @@
         // $.fn.datepicker.defaults.autoclose = true;
         // $.fn.datepicker.defaults.format = 'dd/mm/yyyy';
     </script>
+    <script>
+        function base_url(url) {
+            return "<?php echo base_url() ?>" + url;
+        }
+        $(document).ready(function() {
+            $('.select2').select2()
+        });
+
+        $.fn.formSubmit = function(respData) {
+            this.on('submit', function(event) {
+                event.preventDefault();
+                $.LoadingOverlay("show");
+                var formdata = new FormData(this);
+                var method = this.method ? this.method : 'post';
+                return $.ajax({
+                    url: this.action,
+                    type: method,
+                    dataType: 'json',
+                    data: formdata,
+                    processData: false,
+                    contentType: false
+                }).always(function(response) {
+                    $.LoadingOverlay("hide");
+                    switch (response.status) {
+                        case 1:
+                            swal('Success', response.msg, 'success')
+                            break;
+                        case 2:
+                            swal('Maaf!', response.msg, 'error');
+                            break;
+                        default:
+                            swal('Maaf!', 'Mohon periksa koneksi internet anda.', 'error');
+                            break;
+                    }
+                    respData(response);
+                });
+            })
+        }
+    </script>
 </head>
 
 <body class="sidebar-mini layout-navbar-fixed layout-fixed">
@@ -195,14 +234,23 @@
                                     </p>
                                 </a>
                             </li>
+                            <li class="nav-item">
+                                <a href="<?= base_url('Profile/admin') ?>" class="nav-link">
+                                    <i class="nav-icon fas fa-user"></i>
+                                    <p>Profile
+                                    </p>
+                                </a>
+                            </li>
                         <?php endif; ?>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-user"></i>
-                                <p>Profile
-                                </p>
-                            </a>
-                        </li>
+                        <?php if ($session_group_id == 2) : ?>
+                            <li class="nav-item">
+                                <a href="<?= base_url('Profile/user') ?>" class="nav-link">
+                                    <i class="nav-icon fas fa-user"></i>
+                                    <p>Profile
+                                    </p>
+                                </a>
+                            </li>
+                        <?php endif; ?>
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->
@@ -257,14 +305,6 @@
     <!-- Toastr -->
     <script src="<?= base_url('public/assets') ?>/dist/js/toastr.min.js"></script>
     <!-- AdminLTE App -->
-    <script>
-        function base_url(url) {
-            return "<?php echo base_url() ?>" + url;
-        }
-        $(document).ready(function() {
-            $('.select2').select2()
-        });
-    </script>
 </body>
 
 </html>
