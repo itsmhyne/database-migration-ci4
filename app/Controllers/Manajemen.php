@@ -35,7 +35,7 @@ class Manajemen extends BaseController
         $m = $this->datatables->get();
         foreach ($m as $key => $value) {
             $m[$key]['user_foto'] = '<img src="' . \base_url('public/assets/dist/img/user/') . '/' . $value['user_foto'] . '" width="100"/>';
-            $m[$key]['user_id'] = '<button class="btn btn-sm btn-danger btn-icon dt-status" target-id="' . $m[$key]['user_id'] . '" onclick="dt_status(this)"><i class="fas fa-sign-in-alt mr-2"></i>Nonaktifkan</button>';
+            $m[$key]['user_id'] = '<button class="btn btn-sm btn-danger btn-icon dt-status" target-id="' . $m[$key]['user_id'] . '" onclick="dt_status(this)"><i class="fas fa-power-off mr-2"></i>Nonaktifkan</button>';
         }
         $this->datatables->render_no_keys($m);
     }

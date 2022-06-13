@@ -220,7 +220,7 @@
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="#" class="nav-link">
+                                        <a href="<?= base_url('Datamaster/komunitas') ?>" class="nav-link">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>Komunitas</p>
                                         </a>

@@ -5,9 +5,9 @@
             <div class="col-sm-6">
                 <h1><?= $menu ?></h1>
             </div>
-            <div class="col-sm-6">
+            <div class="col-sm-6 d-none">
                 <ol class="breadcrumb float-sm-right">
-                    <button class="btn btn-success btn-sm btn-icon" onclick="dt_add(this)"><i class="fa fa-plus"></i> Tambahkan Admin</button>
+                    <button class="btn btn-success btn-sm btn-icon" onclick="dt_add(this)"><i class="fa fa-plus"></i> Tambahkan Komunitas</button>
                 </ol>
             </div>
         </div>
@@ -28,12 +28,13 @@
                                     <table id="tabel-data" class="table table-bordered table-striped dataTable dtr-inline" aria-describedby="example1_info">
                                         <thead>
                                             <tr class="text-center">
-                                                <th>Nama</th>
                                                 <th>Foto</th>
-                                                <th>No. Handphone</th>
-                                                <th>Email</th>
-                                                <th>Alamat</th>
-                                                <th width="15%">Aksi</th>
+                                                <th>Nama</th>
+                                                <th>Bidang</th>
+                                                <th>Jumlah Anggota</th>
+                                                <th>Ketua</th>
+                                                <th>Kontak</th>
+                                                <th width="10%">Aksi</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -106,11 +107,18 @@
 </div>
 <!-- end modal -->
 
+<!-- button -->
+<div id="dt_btn_utils" class="d-none">
+    <button class="btn btn-sm btn-warning btn-icon dt-edit"><i class="fa fa-edit"></i></button>
+    <button class="btn btn-sm btn-danger btn-icon dt-delete"><i class="fa fa-trash"></i></button>
+</div>
+<!-- end button -->
+
 <script>
     $(document).ready(function() {
         $('#tabel-data').DataTable({
             ajax: {
-                url: "<?php echo base_url('Manajemen/admin_fetch') ?>",
+                url: "<?php echo base_url('Datamaster/komunitas_fetch') ?>",
                 dataSrc: "data",
                 type: "POST"
             },
@@ -132,7 +140,10 @@
                     data: 4
                 },
                 {
-                    data: 5,
+                    data: 5
+                },
+                {
+                    data: 6,
                     searchable: false,
                     orderable: false
                 },
@@ -144,18 +155,17 @@
 
     function dt_add(t) {
         $.LoadingOverlay("show");
-        $.get('<?php echo base_url('Manajemen/manajemen_modal/tambah_admin') ?>').done(function(data) {
+        $.get('<?php echo base_url('Datamaster/room_modal/room_add') ?>').done(function(data) {
             $.LoadingOverlay("hide");
-            $('#modal-body-admin').html(data);
-            $('#modal_tambah').modal('show')
+            $('#modal-body-room').html(data);
+            $('#modal_ruangan').modal('show')
         });
     }
-
 
     function dt_status(t) {
         var id = t.getAttribute('target-id');
         $.LoadingOverlay("show");
-        $.get('<?php echo base_url('Manajemen/manajemen_modal/pass_validation') ?>', {
+        $.get('<?php echo base_url('Datamaster/komunitas_modal/pass_validation') ?>', {
             'id': $(t).attr('target-id')
         }).done(function(data) {
             $.LoadingOverlay("hide");
@@ -164,13 +174,13 @@
         });
     }
 
-    $('#form-nonaktifkan').submit(function(event) {
+    $('#form-ruangan').submit(function(event) {
         $.LoadingOverlay("show");
-        $.post('<?php echo base_url('Manajemen/nonaktifkan_akun') ?>', $(this).serialize(), function(response, textStatus, xhr) {
+        $.post('<?php echo base_url('Datamaster/room_save') ?>', $(this).serialize(), function(response, textStatus, xhr) {
             if (response.status == true) {
                 toastr.success(response.msg);
                 $('#tabel-data').DataTable().ajax.reload();
-                $('#modal_validation').modal('hide');
+                $('#modal_ruangan').modal('hide');
                 $.LoadingOverlay("hide");
             } else {
                 toastr.error(response.msg);
@@ -180,19 +190,34 @@
         return false;
     });
 
-    $('#form-simpan').submit(function(event) {
-        $.LoadingOverlay("show");
-        $.post('<?php echo base_url('Manajemen/tambah_admin') ?>', $(this).serialize(), function(response, textStatus, xhr) {
-            if (response.status == true) {
-                toastr.success(response.msg);
-                $('#tabel-data').DataTable().ajax.reload();
-                $('#modal_tambah').modal('hide');
+    function dt_delete(t) {
+        var id = t.getAttribute('target-id');
+        swal({
+            title: 'Peringatan!',
+            text: 'Data yang dihapus tidak dapat dikembalikan!',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#A9A9A9',
+            cancelButtonText: 'Tidak',
+            confirmButtonText: 'Ya',
+        }).then(function() {
+            $.LoadingOverlay("show");
+            $.post('<?php echo base_url('Datamaster/room_delete') ?>', {
+                'id': id
+            }, function(result, textStatus, xhr) {
                 $.LoadingOverlay("hide");
-            } else {
-                toastr.error(response.msg);
-                $.LoadingOverlay("hide");
+                if (result.status > 0) {
+                    swal('Sukses!', result.msg, 'success');
+                    $('#tabel-data').DataTable().ajax.reload();
+                } else {
+                    swal('Maaf!', 'Server dalam perbaikan!', 'error');
+                }
+            }, 'json');
+        }, function(dismiss) {
+            if (dismiss === 'cancel') {
+
             }
-        }, "json");
-        return false;
-    });
+        });
+    }
 </script>
