@@ -52,6 +52,7 @@ defined('APP_ICON') || define('APP_ICON', 'Nama Ikonmu.png');
 ## Fitur
 
 - Login Administrator dan Komunitas
+- Nonaktifkan Administartor dan Komunitas dengan autentikasi password
 - Registrasi Member
 - Dasboard peminjaman
 - Pengaturan Ruangan
