@@ -149,4 +149,10 @@ class Peminjaman extends BaseController
         }
         $this->datatables->render_no_keys($m);
     }
+
+    public function peminjaman_modal($html)
+    {
+        $data['var'] = $this->input->getPost('id');;
+        $this->lib_sys->view_modal('peminjaman/' . $html, $data);
+    }
 }

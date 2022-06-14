@@ -27,8 +27,8 @@ class Pengajuan extends BaseController
 
     public function daftar_pengajuan_fetch()
     {
-        $this->datatables->search(['ruangan_nama', 'komunitas_nama', 'p.created_time', 'pengajuan_id', 'p.komunitas_id']);
-        $this->datatables->select('ruangan_nama, komunitas_nama, p.created_time, pengajuan_id, p.komunitas_id, p.ruangan_id');
+        $this->datatables->search(['ruangan_nama', 'komunitas_nama', 'p.pengajuan_catatan', 'p.created_time', 'pengajuan_id', 'p.komunitas_id']);
+        $this->datatables->select('ruangan_nama, komunitas_nama, p.pengajuan_catatan, p.created_time, pengajuan_id, p.komunitas_id, p.ruangan_id');
         $this->datatables->from('pengajuan as p');
         $this->datatables->join('komunitas as k', 'k.komunitas_id = p.komunitas_id');
         $this->datatables->join('ruangan as r', 'r.ruangan_id = p.ruangan_id');

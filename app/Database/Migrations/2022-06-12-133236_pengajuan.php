@@ -24,6 +24,10 @@ class Pengajuan extends Migration
 				'constraint' => '4',
 				'default' => 1
 			],
+			'pengajuan_catatan' => [
+				'type'           => 'TEXT',
+				'null'           => true,
+			],
 			'created_time DATETIME DEFAULT CURRENT_TIMESTAMP',
 			'created_by' => [
 				'type'           => 'INT',

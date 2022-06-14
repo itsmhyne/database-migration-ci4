@@ -30,6 +30,7 @@
                                             <tr class="text-center">
                                                 <th>Nama Ruangan</th>
                                                 <th width="30%">Nama yang Mengajukan</th>
+                                                <th>Pengajuan Catatan</th>
                                                 <th>Waktu Pengajuan</th>
                                                 <th width="15%">Aksi</th>
                                             </tr>
@@ -72,7 +73,10 @@
                     data: 2
                 },
                 {
-                    data: 3,
+                    data: 3
+                },
+                {
+                    data: 4,
                     searchable: false,
                     orderable: false
                 },
