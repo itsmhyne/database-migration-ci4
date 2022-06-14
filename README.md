@@ -57,6 +57,6 @@ defined('APP_ICON') || define('APP_ICON', 'Nama Ikonmu.png');
 - Pengaturan Ruangan
 - Pengaturan Akun Administrator
 - Peminjaman Ruangan
-- Peminjaman Auto Dikembalikan Ketika Session Berakhir
+- Peminjaman Auto Dikembalikan Ketika Session Berakhir (admin harus login aplikasi)
 - Grafik Peminjaman
 - Export PDF Peminjaman User
