@@ -25,7 +25,7 @@
                         <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <table id="tabel-data" class="table table-bordered table-striped dataTable dtr-inline" aria-describedby="example1_info">
+                                    <table id="tabel-komunitas" class="table table-bordered table-striped dataTable dtr-inline" aria-describedby="example1_info">
                                         <thead>
                                             <tr class="text-center">
                                                 <th>Foto</th>
@@ -116,7 +116,7 @@
 
 <script>
     $(document).ready(function() {
-        $('#tabel-data').DataTable({
+        $('#tabel-komunitas').DataTable({
             ajax: {
                 url: "<?php echo base_url('Datamaster/komunitas_fetch') ?>",
                 dataSrc: "data",
@@ -125,22 +125,27 @@
             processing: true,
             serverSide: true,
             columns: [{
-                    data: 0
+                    data: 0,
+                    searchable: false,
+                    orderable: false
                 },
                 {
                     data: 1
                 },
                 {
-                    data: 2
+                    data: 2,
+                    orderable: false
                 },
                 {
                     data: 3
                 },
                 {
-                    data: 4
+                    data: 4,
+                    orderable: false
                 },
                 {
-                    data: 5
+                    data: 5,
+                    orderable: false
                 },
                 {
                     data: 6,
@@ -174,12 +179,28 @@
         });
     }
 
+    $('#form-nonaktifkan').submit(function(event) {
+        $.LoadingOverlay("show");
+        $.post('<?php echo base_url('Datamaster/nonaktifkan_komunitas') ?>', $(this).serialize(), function(response, textStatus, xhr) {
+            if (response.status == true) {
+                toastr.success(response.msg);
+                $('#tabel-komunitas').DataTable().ajax.reload();
+                $('#modal_validation').modal('hide');
+                $.LoadingOverlay("hide");
+            } else {
+                toastr.error(response.msg);
+                $.LoadingOverlay("hide");
+            }
+        }, "json");
+        return false;
+    });
+
     $('#form-ruangan').submit(function(event) {
         $.LoadingOverlay("show");
         $.post('<?php echo base_url('Datamaster/room_save') ?>', $(this).serialize(), function(response, textStatus, xhr) {
             if (response.status == true) {
                 toastr.success(response.msg);
-                $('#tabel-data').DataTable().ajax.reload();
+                $('#tabel-komunitas').DataTable().ajax.reload();
                 $('#modal_ruangan').modal('hide');
                 $.LoadingOverlay("hide");
             } else {
@@ -209,7 +230,7 @@
                 $.LoadingOverlay("hide");
                 if (result.status > 0) {
                     swal('Sukses!', result.msg, 'success');
-                    $('#tabel-data').DataTable().ajax.reload();
+                    $('#tabel-komunitas').DataTable().ajax.reload();
                 } else {
                     swal('Maaf!', 'Server dalam perbaikan!', 'error');
                 }

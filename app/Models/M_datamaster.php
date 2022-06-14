@@ -45,4 +45,29 @@ class M_datamaster extends BaseModel
 
         $this->resp_S('Data berhasil dihapus');
     }
+
+    function nonaktifkan_komunitas()
+    {
+        // cek pakah password benar
+        $password = \md5($this->input->getPost('password'));
+        $user_id = $this->session->get('user_id');
+        $komunitas_id = $this->input->getPost('komunitas_id');
+        $db = $this->db->table('_sys_user')
+            ->select('user_name, user_id, user_group_id, user_foto')
+            ->where('user_id', $user_id)
+            ->where("password", $password)
+            ->get()->getRow();
+        if ($db) {
+            // update status komunitas
+            $setDataDelete = $this->setCrudIdentity('delete');
+            $data = $this->db->table('komunitas')
+                ->where('komunitas_id', $komunitas_id)
+                ->set($setDataDelete)
+                ->update();
+            // notifikasi 
+            $this->resp_S('Komunitas berhasil dinonaktifkan');
+        } else {
+            $this->resp_E('Password Anda Salah');
+        }
+    }
 }

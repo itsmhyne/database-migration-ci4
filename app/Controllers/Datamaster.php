@@ -75,7 +75,7 @@ class Datamaster extends BaseController
         $m = $this->datatables->get();
         foreach ($m as $key => $value) {
             if ($m[$key]['komunitas_logo']) {
-                $m[$key]['komunitas_logo'] = '<img src="' . \base_url('public/assets/dist/img/user') . '/' . $m[$key]['komunitas_logo'] . '" width="100"/>';
+                $m[$key]['komunitas_logo'] = '<img src="' . \base_url('public/assets/dist/img/user') . '/' . $m[$key]['komunitas_logo'] . '" class="profile-user-img img-fluid img-circle"/>';
             }
             if ($m[$key]['komunitas_id']) {
                 $m[$key]['komunitas_id'] = '<button class="btn btn-sm btn-danger btn-icon dt-status" target-id="' . $m[$key]['komunitas_id'] . '" onclick="dt_status(this)"><i class="fas fa-power-off mr-2"></i>Nonaktifkan</button>';
@@ -88,5 +88,10 @@ class Datamaster extends BaseController
     {
         $data['var'] = $this->db->table('komunitas')->where('komunitas_id', @$_GET['id'])->get()->getRow();
         $this->lib_sys->view_modal('Datamaster/' . $html, $data);
+    }
+
+    public function nonaktifkan_komunitas()
+    {
+        $this->m->nonaktifkan_komunitas();
     }
 }

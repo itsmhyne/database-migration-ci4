@@ -20,7 +20,7 @@ class M_manajemen extends BaseModel
             ->where("password", $password)
             ->get()->getRow();
         if ($db) {
-            // update status ruangan
+            // update status user
             $setDataDelete = $this->setCrudIdentity('delete');
             $data = $this->db->table('_sys_user')
                 ->where('user_id', $akun_id)

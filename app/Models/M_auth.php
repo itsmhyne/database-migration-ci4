@@ -24,12 +24,14 @@ class M_auth extends BaseModel
             ->orWhere('email', $data['email'])
             ->groupEnd()
             ->where("password", $data['password'])
+            ->where('status', '1')
             ->get()->getRow();
 
         $checkKomunitas = $this->db->table('komunitas')
             ->select('komunitas_nama as user_name, komunitas_id as user_id, user_group_id, komunitas_logo as user_foto')
             ->where('username', $data['email'])
             ->where('password', $data['password'])
+            ->where('status', '1')
             ->get()
             ->getRow();
 
