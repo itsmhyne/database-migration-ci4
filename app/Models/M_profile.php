@@ -153,7 +153,7 @@ class M_profile extends BaseModel
                         'jml_anggota' => $jml_anggota,
                         'ketua' => $ketua,
                         'kontak' => $kontak,
-                        'password' => $password
+                        'password' => md5($password)
                     ]);
                 } else {
                     if ($gambar != 'default_user.jpg') {
@@ -168,7 +168,7 @@ class M_profile extends BaseModel
                         'ketua' => $ketua,
                         'kontak' => $kontak,
                         'komunitas_logo' => $namaFoto,
-                        'password' => $password
+                        'password' => md5($password)
                     ]);
                 }
                 $tbKomunitas->set($setData)
