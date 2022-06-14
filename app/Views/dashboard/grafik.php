@@ -42,8 +42,8 @@
                     </button>
                 </div>
             </div>
-            <div class="card-body" style="align-items: center;">
-                <div class="chart" style="width: 400px;">
+            <div class="card-body">
+                <div class="chart">
                     <div class="chartjs-size-monitor">
                         <div class="chartjs-size-monitor-expand">
                             <div class=""></div>
@@ -120,7 +120,7 @@ if (count($ruangan) > 0) {
         labels: <?= json_encode($ruangan_id) ?>,
         datasets: [{
             label: '# of Votes',
-            data: <?= json_encode($peminjaman) ?>,
+            data: <?php echo '[' . implode(',', $peminjaman) . ']'; ?>,
             backgroundColor: [
                 'rgba(255, 99, 132, 1)',
                 'rgba(54, 162, 235, 1)',
@@ -151,13 +151,14 @@ if (count($ruangan) > 0) {
                 datalabels: {
                     formatter: (value, context) => {
                         const datapoints = context.chart.data.datasets[0].data;
+                        console.log(datapoints);
 
                         function totalSum(total, datapoint) {
                             return total + datapoint;
                         }
                         const totalValue = datapoints.reduce(totalSum, 0);
                         const precentageValue = (value / totalValue * 100).toFixed(1);
-                        return `${value}`;
+                        return `${precentageValue}%`;
                     }
                 }
             }
