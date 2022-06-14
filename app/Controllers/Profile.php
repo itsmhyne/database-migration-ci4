@@ -25,8 +25,20 @@ class Profile extends BaseController
         $this->lib_sys->view('profile/admin', $data);
     }
 
+    public function komunitas()
+    {
+        $data['menu'] = 'Profile Saya';
+        $data['user'] = $this->m->getKomunitas();
+        $this->lib_sys->view('profile/komunitas', $data);
+    }
+
     public function updateAdmin()
     {
         $this->m->updateAdmin();
+    }
+
+    public function updateKomunitas()
+    {
+        $this->m->updateKomunitas();
     }
 }

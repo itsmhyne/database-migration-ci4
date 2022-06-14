@@ -244,7 +244,7 @@
                         <?php endif; ?>
                         <?php if ($session_group_id == 2) : ?>
                             <li class="nav-item">
-                                <a href="<?= base_url('Profile/user') ?>" class="nav-link">
+                                <a href="<?= base_url('Profile/komunitas') ?>" class="nav-link">
                                     <i class="nav-icon fas fa-user"></i>
                                     <p>Profile
                                     </p>
