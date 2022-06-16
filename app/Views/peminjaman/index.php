@@ -77,31 +77,11 @@
 </div>
 <!-- end modal -->
 
-<!-- modal -->
-<div class="modal fade" id="modal_validation" aria-hidden="true" style="display: none;">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <form id="form-pengajuan" method="post">
-                <div class="modal-header">
-                    <h4 class="modal-title">Form</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body" id="modal-body-validation">
-
-                </div>
-                <div class="modal-footer justify-content-between">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
-                    <button type="submit" class="btn btn-success">Ajukan Peminjaman</button>
-                </div>
-            </form>
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
+<!-- button -->
+<div id="dt_btn_utils" class="d-none">
+    <button class="btn btn-sm btn-warning btn-icon dt-delete"><i class="fas fa-sign-in-alt mr-2"></i>Pinjam</button>
 </div>
-<!-- end modal -->
+<!-- end button -->
 
 <script>
     $(document).ready(function() {
@@ -168,64 +148,35 @@
 
     function dt_pinjam(t) {
         var id = t.getAttribute('target-id');
-        $.LoadingOverlay("show");
-        $.post('<?php echo base_url('Peminjaman/peminjaman_modal/pengajuan_catatan') ?>', {
-            'id': id
-        }).done(function(data) {
-            $.LoadingOverlay("hide");
-            $('#modal-body-validation').html(data);
-            $('#modal_validation').modal('show')
+        swal({
+            title: 'Informasi!',
+            text: 'Ajukan peminjaman ruangan ini?',
+            type: 'info',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#A9A9A9',
+            cancelButtonText: 'Tidak',
+            confirmButtonText: 'Ya',
+        }).then(function() {
+            $.LoadingOverlay("show");
+            $.post('<?php echo base_url('Peminjaman/ajukan_peminjaman') ?>', {
+                'id': id
+            }, function(result, textStatus, xhr) {
+                $.LoadingOverlay("hide");
+                if (result.status == 1) {
+                    swal('Sukses!', result.msg, 'success');
+                    $('#tabel-data').DataTable().ajax.reload();
+                } else if (result.status == 2) {
+                    swal('Peringatan!', result.msg, 'warning');
+                    $('#tabel-data').DataTable().ajax.reload();
+                } else {
+                    swal('Maaf!', 'Server dalam perbaikan!', 'error');
+                }
+            }, 'json');
+        }, function(dismiss) {
+            if (dismiss === 'cancel') {
+
+            }
         });
     }
-
-    $('#form-pengajuan').submit(function(event) {
-        $.LoadingOverlay("show");
-        $.post('<?php echo base_url('Peminjaman/ajukan_peminjaman') ?>', $(this).serialize(), function(response, textStatus, xhr) {
-            if (response.status == true) {
-                toastr.success(response.msg);
-                $('#tabel-data').DataTable().ajax.reload();
-                $('#modal_validation').modal('hide');
-                $.LoadingOverlay("hide");
-            } else {
-                toastr.error(response.msg);
-                $('#modal_validation').modal('hide');
-                $.LoadingOverlay("hide");
-            }
-        }, "json");
-        return false;
-    });
-
-    // function dt_pinjam(t) {
-    //     var id = t.getAttribute('target-id');
-    //     swal({
-    //         title: 'Informasi!',
-    //         text: 'Ajukan peminjaman ruangan ini?',
-    //         type: 'info',
-    //         showCancelButton: true,
-    //         confirmButtonColor: '#3085d6',
-    //         cancelButtonColor: '#A9A9A9',
-    //         cancelButtonText: 'Tidak',
-    //         confirmButtonText: 'Ya',
-    //     }).then(function() {
-    //         $.LoadingOverlay("show");
-    //         $.post('<?php echo base_url('Peminjaman/ajukan_peminjaman') ?>', {
-    //             'id': id
-    //         }, function(result, textStatus, xhr) {
-    //             $.LoadingOverlay("hide");
-    //             if (result.status == 1) {
-    //                 swal('Sukses!', result.msg, 'success');
-    //                 $('#tabel-data').DataTable().ajax.reload();
-    //             } else if (result.status == 2) {
-    //                 swal('Peringatan!', result.msg, 'warning');
-    //                 $('#tabel-data').DataTable().ajax.reload();
-    //             } else {
-    //                 swal('Maaf!', 'Server dalam perbaikan!', 'error');
-    //             }
-    //         }, 'json');
-    //     }, function(dismiss) {
-    //         if (dismiss === 'cancel') {
-
-    //         }
-    //     });
-    // }
 </script>

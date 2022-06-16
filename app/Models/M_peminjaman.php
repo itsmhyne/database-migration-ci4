@@ -91,8 +91,7 @@ class M_peminjaman extends BaseModel
     function ajukan_peminjaman()
     {
 
-        $ruangan_id = $this->input->getPost('ruangan_id');
-        $pengajuan_catatan = $this->input->getPost('pengajuan_catatan');
+        $ruangan_id = $this->input->getPost('id');
         $user_id = $this->session->get('user_id');
 
         // cek pakah user sudah mengajukan peminjaman
@@ -112,7 +111,6 @@ class M_peminjaman extends BaseModel
             $tabelPengajuan = $this->db->table('pengajuan');
             $dataPengajuan = $this->setCrudIdentity('insert', [
                 'ruangan_id' => $ruangan_id,
-                'pengajuan_catatan' => $pengajuan_catatan,
                 'komunitas_id' => $user_id
             ]);
             $tabelPengajuan->set($dataPengajuan)

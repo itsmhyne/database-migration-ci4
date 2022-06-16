@@ -84,8 +84,6 @@ phpunit
 # Composer
 #-------------------------
 vendor/
-composer.lock
-app/config/
 
 #-------------------------
 # IDE / Development Files
@@ -105,6 +103,7 @@ _modules/*
 nbproject/
 build/
 nbbuild/
+dist/
 nbdist/
 nbactions.xml
 nb-configuration.xml
@@ -126,4 +125,3 @@ nb-configuration.xml
 /phpunit*.xml
 /.phpunit.*.cache
 
-#ci configuration
